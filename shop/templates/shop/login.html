@@ -1,0 +1,42 @@
+{% extends "shop/base.html" %}
+{% load i18n %}
+{% block title %}Вход{% endblock %}
+{% block content %}
+<div class="auth-wrapper">
+  <div class="auth-card">
+    <h2>{% trans "Войти" %}</h2>
+
+    {% if already %}
+      <p class="muted">{% trans "Вы сейчас авторизованы как" %} {{ request.user.username }}. {% trans "Если хотите войти другим аккаунтом — нажмите \"Выйти\" и снова введите данные." %}</p>
+    {% endif %}
+
+    <form method="post">
+      {% csrf_token %}
+      <div class="form-row">
+        {{ form.username.label_tag }}
+        {{ form.username }}
+      </div>
+
+      <div class="form-row">
+        {{ form.identifier.label_tag }}
+        {{ form.identifier }}
+      </div>
+
+      <div class="form-row">
+        {{ form.password.label_tag }}
+        {{ form.password }}
+      </div>
+
+      <button type="submit">{% trans "Войти" %}</button>
+    </form>
+
+    <hr style="margin:18px 0; border:none; border-top:1px solid #eef2f7;">
+
+    <div style="text-align:center;">
+      <a class="oidc-btn" href="{% url 'oidc_authentication_init' %}">{% trans "Войти через Keycloak" %}</a>
+    </div>
+
+    <p class="muted" style="margin-top:14px;">{% trans "Нет аккаунта?" %} <a href="{% url 'shop:register' %}">{% trans "Зарегистрироваться" %}</a></p>
+  </div>
+</div>
+{% endblock %}

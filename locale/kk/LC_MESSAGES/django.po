@@ -1,0 +1,583 @@
+# Kazakh translations
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-04 13:22+0500\n"
+"Language: kk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: .\shop\templates\shop\admin_panel.html:3
+#: .\shop\templates\shop\admin_panel.html:6
+msgid "Админ-панель"
+msgstr "Админ панелі"
+
+#: .\shop\templates\shop\admin_panel.html:3 .\shop\templates\shop\base.html:8
+#: .\shop\templates\shop\base.html:14 .\shop\templates\shop\index.html:4
+#: .\shop\templates\shop\stats.html:5 .\shop\templates\shop\user_cart.html:3
+msgid "Магазин"
+msgstr "Дүкен"
+
+#: .\shop\templates\shop\admin_panel.html:12
+msgid "Имя пользователя"
+msgstr "Пайдаланушының аты"
+
+#: .\shop\templates\shop\admin_panel.html:14
+msgid "Роль"
+msgstr "Рөл"
+
+#: .\shop\templates\shop\admin_panel.html:15
+msgid "Действия"
+msgstr "Әрекеттер"
+
+#: .\shop\templates\shop\admin_panel.html:26
+#: .\shop\templates\shop\base.html:34
+msgid "Админ"
+msgstr "Админ"
+
+#: .\shop\templates\shop\admin_panel.html:26
+#: .\shop\templates\shop\profile.html:254
+msgid "Пользователь"
+msgstr "Пайдаланушы"
+
+#: .\shop\templates\shop\admin_panel.html:31
+#: .\shop\templates\shop\base.html:36 .\shop\templates\shop\cart.html:4
+#: .\shop\templates\shop\user_cart.html:3
+msgid "Корзина"
+msgstr "Себет"
+
+#: .\shop\templates\shop\admin_panel.html:34
+msgid "Убрать админа"
+msgstr "Админды өндіру"
+
+#: .\shop\templates\shop\admin_panel.html:34
+msgid "Дать админа"
+msgstr "Админ беру"
+
+#: .\shop\templates\shop\admin_panel.html:47
+msgid "Вернуться на главную"
+msgstr "Басты бетке оралу"
+
+#: .\shop\templates\shop\base.html:39 .\shop\templates\shop\index.html:86
+msgid "Добавить"
+msgstr "Қосу"
+
+#: .\shop\templates\shop\base.html:43 .\shop\templates\shop\base.html:52
+#: .\shop\templates\shop\stats.html:5 .\shop\templates\shop\stats.html:9
+msgid "Статистика"
+msgstr "Статистика"
+
+#: .\shop\templates\shop\base.html:46
+msgid "Выйти"
+msgstr "Шығу"
+
+#: .\shop\templates\shop\base.html:48 .\shop\templates\shop\index.html:161
+#: .\shop\templates\shop\register.html:7
+msgid "Регистрация"
+msgstr "Тіркеу"
+
+#: .\shop\templates\shop\base.html:49 .\shop\templates\shop\login.html:7
+#: .\shop\templates\shop\login.html:30 .\shop\templates\shop\register.html:32
+msgid "Войти"
+msgstr "Кіру"
+
+#: .\shop\templates\shop\cart.html:265
+msgid "Ваша корзина"
+msgstr "Сіздің себетіңіз"
+
+#: .\shop\templates\shop\cart.html:295 .\shop\templates\shop\index.html:102
+msgid "Удалить"
+msgstr "Жою"
+
+#: .\shop\templates\shop\cart.html:304
+#, fuzzy
+#| msgid "Количество"
+msgid "Количество товаров"
+msgstr "Саны"
+
+#: .\shop\templates\shop\cart.html:308
+msgid "Итого"
+msgstr "Барлығы"
+
+#: .\shop\templates\shop\cart.html:311
+msgid "Оформить заказ"
+msgstr "Тапсырысты рәсімдеу"
+
+#: .\shop\templates\shop\cart.html:317
+#, fuzzy
+#| msgid "Ваша корзина"
+msgid "Ваша корзина пуста"
+msgstr "Сіздің себетіңіз бос"
+
+#: .\shop\templates\shop\cart.html:318
+#, fuzzy
+#| msgid "Добавьте товары в избранное, чтобы вернуться к ним позже"
+msgid "Добавьте товары в корзину для оформления заказа"
+msgstr "Тапсырысты рәсімдеу үшін тауарларды себетке қосыңыз"
+
+#: .\shop\templates\shop\cart.html:319 .\shop\templates\shop\wishlist.html:328
+msgid "Перейти в каталог"
+msgstr "Каталогқа өту"
+
+#: .\shop\templates\shop\index.html:4
+msgid "Главная"
+msgstr "Басты бет"
+
+#: .\shop\templates\shop\index.html:9
+msgid "Поиск товара..."
+msgstr "Тауарды іздеу..."
+
+#: .\shop\templates\shop\index.html:28
+msgid "Все товары"
+msgstr "Барлық тауарлар"
+
+#: .\shop\templates\shop\index.html:29
+#, fuzzy
+#| msgid "Сначала дешевые"
+msgid "Дешевые"
+msgstr "Алдымен арзан"
+
+#: .\shop\templates\shop\index.html:30
+#, fuzzy
+#| msgid "Сначала дорогие"
+msgid "Дорогие"
+msgstr "Алдымен қымбат"
+
+#: .\shop\templates\shop\index.html:58 .\shop\templates\shop\index.html:136
+msgid "Производитель"
+msgstr "Өндіруші"
+
+#: .\shop\templates\shop\index.html:62 .\shop\templates\shop\index.html:140
+msgid "Год выпуска"
+msgstr "Шығарылған жылы"
+
+#: .\shop\templates\shop\index.html:66 .\shop\templates\shop\index.html:144
+msgid "Вес"
+msgstr "Салмақ"
+
+#: .\shop\templates\shop\index.html:67
+msgid "кг"
+msgstr "кг"
+
+#: .\shop\templates\shop\index.html:101 .\shop\templates\shop\profile.html:279
+#: .\shop\templates\shop\profile.html:307
+#: .\shop\templates\shop\profile.html:331
+#: .\shop\templates\shop\profile.html:360
+msgid "Изменить"
+msgstr "Өзгерту"
+
+#: .\shop\templates\shop\index.html:110
+msgid "Пока нет товаров."
+msgstr "Әзірге товар жоқ."
+
+#: .\shop\templates\shop\index.html:116
+msgid "Удалить товар?"
+msgstr "Товарды жоюды қалайсыз ба?"
+
+#: .\shop\templates\shop\index.html:117
+msgid "Это действие нельзя отменить."
+msgstr "Бұл әрекетті болдырмау мүмкін емес."
+
+#: .\shop\templates\shop\index.html:120
+msgid "Да, удалить"
+msgstr "Иә, жою"
+
+#: .\shop\templates\shop\index.html:122 .\shop\templates\shop\profile.html:297
+#: .\shop\templates\shop\profile.html:321
+#: .\shop\templates\shop\profile.html:345
+#: .\shop\templates\shop\profile.html:378
+msgid "Отмена"
+msgstr "Болдырмау"
+
+#: .\shop\templates\shop\index.html:148
+msgid "Цена"
+msgstr "Баға"
+
+#: .\shop\templates\shop\index.html:159
+msgid "Войдите или зарегистрируйтесь, чтобы добавить товар в корзину."
+msgstr "Товарды себетке қосу үшін кіріңіз немесе тіркеліңіз."
+
+#: .\shop\templates\shop\index.html:160
+msgid "Вход"
+msgstr "Кіру"
+
+#: .\shop\templates\shop\index.html:166
+msgid "Вы администратор. Редактируйте товар из страницы списка."
+msgstr "Сіз администратор. Товарды тізім бетінен өңдеңіз."
+
+#: .\shop\templates\shop\index.html:171
+msgid "Добавить в корзину"
+msgstr "Себетке қосу"
+
+#: .\shop\templates\shop\index.html:177
+msgid "Закрыть"
+msgstr "Жабу"
+
+#: .\shop\templates\shop\index.html:296
+#: .\shop\templates\shop\wishlist.html:401
+#, fuzzy
+#| msgid "Добавить"
+msgid "Добавляю..."
+msgstr "Қосу"
+
+#: .\shop\templates\shop\index.html:313 .\shop\templates\shop\index.html:460
+#: .\shop\templates\shop\index.html:522
+#, fuzzy
+#| msgid "Закрыть"
+msgid "Открыть"
+msgstr "Жабу"
+
+#: .\shop\templates\shop\index.html:323
+#, fuzzy
+#| msgid "Товар добавлен"
+msgid "Ошибка при добавлении"
+msgstr "Тауар қосылды"
+
+#: .\shop\templates\shop\login.html:10
+msgid "Вы сейчас авторизованы как"
+msgstr "Сіз қазір жүйеге кіргенсіз"
+
+#: .\shop\templates\shop\login.html:10
+#, fuzzy
+#| msgid ""
+#| "Если хотите войти другим аккаунтом — нажмите \"Выйти\" и снова введите "
+#| "данные."
+msgid "Если хотите войти другим аккаунтом — нажмите \\"
+msgstr ""
+"Басқа есептік жазбамен кіргіңіз келсе — \"Шығу\" батырмасын басып, қайта "
+"кіріңіз."
+
+#: .\shop\templates\shop\login.html:36
+msgid "Войти через Keycloak"
+msgstr "Keycloak арқылы кіру"
+
+#: .\shop\templates\shop\login.html:39
+msgid "Нет аккаунта?"
+msgstr "Есептік жазба жоқ па?"
+
+#: .\shop\templates\shop\login.html:39 .\shop\templates\shop\register.html:29
+msgid "Зарегистрироваться"
+msgstr "Тіркелу"
+
+#: .\shop\templates\shop\product_form.html:11
+#: .\shop\templates\shop\profile.html:296
+#: .\shop\templates\shop\profile.html:320
+#: .\shop\templates\shop\profile.html:344
+#: .\shop\templates\shop\profile.html:377
+msgid "Сохранить"
+msgstr "Сақтау"
+
+#: .\shop\templates\shop\profile.html:252
+msgid "Администратор"
+msgstr "Администратор"
+
+#: .\shop\templates\shop\profile.html:271
+msgid "Информация о профиле"
+msgstr "Профиль туралы ақпарат"
+
+#: .\shop\templates\shop\profile.html:275
+msgid "Email"
+msgstr "Электрондық пошта"
+
+#: .\shop\templates\shop\profile.html:288
+msgid "Новый Email"
+msgstr "Жаңа электрондық пошта"
+
+#: .\shop\templates\shop\profile.html:292
+#: .\shop\templates\shop\profile.html:373
+msgid "Подтверждение пароля"
+msgstr "Парольді растау"
+
+#: .\shop\templates\shop\profile.html:293
+msgid "Введите пароль для подтверждения"
+msgstr "Растау үшін парольді енгізіңіз"
+
+#: .\shop\templates\shop\profile.html:303
+#: .\shop\templates\shop\profile.html:316
+msgid "Имя"
+msgstr "Аты"
+
+#: .\shop\templates\shop\profile.html:327
+#: .\shop\templates\shop\profile.html:340
+msgid "Фамилия"
+msgstr "Тегі"
+
+#: .\shop\templates\shop\profile.html:352
+msgid "Смена пароля"
+msgstr "Парольді өзгерту"
+
+#: .\shop\templates\shop\profile.html:356
+#, fuzzy
+#| msgid "Новый пароль"
+msgid "Пароль"
+msgstr "Жаңа пароль"
+
+#: .\shop\templates\shop\profile.html:369
+msgid "Новый пароль"
+msgstr "Жаңа пароль"
+
+#: .\shop\templates\shop\profile.html:374
+msgid "Повторите пароль"
+msgstr "Парольді қайта енгізіңіз"
+
+#: .\shop\templates\shop\profile.html:385
+#: .\shop\templates\shop\wishlist.html:289
+msgid "Мое избранное"
+msgstr "Менің ең ұнағандарым"
+
+#: .\shop\templates\shop\profile.html:389
+#, fuzzy
+#| msgid "Мое избранное"
+msgid "Просмотреть избранное"
+msgstr "Менің ең ұнағандарым"
+
+#: .\shop\templates\shop\profile.html:394
+msgid ""
+"Сохраняйте понравившиеся товары в избранное, чтобы найти их позже. Нажимайте"
+" на значок сердца на карточке товара."
+msgstr ""
+"Сохраняйте понравившиеся товары в избранное, чтобы найти их позже. Нажимайте"
+" на значок сердца на карточке товара."
+
+#: .\shop\templates\shop\register.html:32
+msgid "Уже есть аккаунт?"
+msgstr "Қазанша есептік жазбаңыз бар ма?"
+
+#: .\shop\templates\shop\stats.html:11
+msgid "Данные за последние дни"
+msgstr "Соңғы күндердегі деректер"
+
+#: .\shop\templates\shop\stats.html:17
+msgid "Источник данных: демо"
+msgstr "Мағат көзі: нәмуне"
+
+#: .\shop\templates\shop\user_cart.html:6
+#, fuzzy
+#| msgid "Имя пользователя"
+msgid "Корзина пользователя:"
+msgstr "Пайдаланушының аты"
+
+#: .\shop\templates\shop\user_cart.html:12
+msgid "Товар"
+msgstr "Тауар"
+
+#: .\shop\templates\shop\user_cart.html:13
+msgid "Количество"
+msgstr "Саны"
+
+#: .\shop\templates\shop\user_cart.html:14
+msgid "Цена за единицу"
+msgstr "Бірлік бағасы"
+
+#: .\shop\templates\shop\user_cart.html:15
+msgid "Сумма"
+msgstr "Жиынтық"
+
+#: .\shop\templates\shop\user_cart.html:31
+#, fuzzy
+#| msgid "Итого"
+msgid "Итого:"
+msgstr "Барлығы"
+
+#: .\shop\templates\shop\user_cart.html:35
+#, fuzzy
+#| msgid "Корзина"
+msgid "Корзина пуста"
+msgstr "Себет бос"
+
+#: .\shop\templates\shop\user_cart.html:39
+#, fuzzy
+#| msgid "Вернуться на главную"
+msgid "Вернуться в админ-панель"
+msgstr "Басты бетке оралу"
+
+#: .\shop\templates\shop\wishlist.html:317
+#, fuzzy
+#| msgid "Ваша корзина"
+msgid "В корзину"
+msgstr "Себетке қосу"
+
+#: .\shop\templates\shop\wishlist.html:326
+msgid "Ваше избранное пусто"
+msgstr "Сіздің ең ұнағандарыңыз бос"
+
+#: .\shop\templates\shop\wishlist.html:327
+msgid "Добавьте товары в избранное, чтобы вернуться к ним позже"
+msgstr "Кейінірек оралу үшін тауарларды ең ұнағандарыңызға қосыңыз"
+
+#: .\shop\views.py:71
+msgid "Регистрация успешна. Вы вошли."
+msgstr "Тіркеу сәтті өтті. Сіз жүйеге кірдіңіз."
+
+#: .\shop\views.py:106
+msgid "Вход выполнен"
+msgstr "Кіру сәтті аяқталды"
+
+#: .\shop\views.py:109
+msgid "Неверный логин/email или пароль"
+msgstr "Қате логин/электрондық пошта немесе пароль"
+
+#: .\shop\views.py:139
+msgid "Только админ может добавлять товары."
+msgstr "Тек админ тауарларды қоса алады."
+
+#: .\shop\views.py:148
+msgid "Товар добавлен"
+msgstr "Тауар қосылды"
+
+#: .\shop\views.py:153
+msgid "Добавить товар"
+msgstr "Тауар қосу"
+
+#: .\shop\views.py:162
+msgid "Вы не можете редактировать товар"
+msgstr "Сіз тауарды өңдей алмайсыз"
+
+#: .\shop\views.py:172
+msgid "Товар обновлён"
+msgstr "Тауар жаңартылды"
+
+#: .\shop\views.py:177
+msgid "Редактировать товар"
+msgstr "Тауарды өңдеу"
+
+#: .\shop\views.py:186
+msgid "Вы не можете удалить товар"
+msgstr "Сіз тауарды жоя алмайсыз"
+
+#: .\shop\views.py:191
+msgid "Товар удалён"
+msgstr "Тауар жойылды"
+
+#: .\shop\views.py:250
+msgid "Пожалуйста, авторизуйтесь"
+msgstr "Пожалуйста, авторизуйтесь"
+
+#: .\shop\views.py:263
+#, python-format
+msgid "Товар '%s' добавлен в корзину"
+msgstr "«%s» тауар себетке қосылды"
+
+#: .\shop\views.py:326 .\shop\views.py:328
+#, python-format
+msgid "%s удалён из корзины"
+msgstr "«%s» себеттен шығарылды"
+
+#: .\shop\views.py:374
+msgid "У вас нет доступа к админ-панели"
+msgstr "Сізде админ-панелге қолжетімділік жоқ"
+
+#: .\shop\views.py:392
+msgid "У вас нет доступа"
+msgstr "Сізде қолжетімділік жоқ"
+
+#: .\shop\views.py:430
+msgid "Вы не можете изменить свою роль"
+msgstr "Сіз өз рөліңізді өзгерте алмайсыз"
+
+#: .\shop\views.py:435
+#, python-format
+msgid "%s больше не администратор"
+msgstr "«%s» енді админ емес"
+
+#: .\shop\views.py:438
+#, python-format
+msgid "%s теперь администратор"
+msgstr "«%s» енді админ"
+
+#: .\shop\views.py:454
+#, fuzzy
+#| msgid "Удалить из избранного"
+msgid "Товар удален из избранного"
+msgstr "Ең ұнағандарынан шығару"
+
+#: .\shop\views.py:458
+#, fuzzy
+#| msgid "Товар '%s' добавлен в корзину"
+msgid "Товар добавлен в избранное"
+msgstr "«%s» тауар себетке қосылды"
+
+#: .\shop\views.py:492
+msgid "Email не может быть пустым"
+msgstr "Электрондық пошта бос болуы мүмкін емес"
+
+#: .\shop\views.py:494
+msgid "Новый email совпадает со старым"
+msgstr "Жаңа электрондық пошта ескісімен сәйкес келеді"
+
+#: .\shop\views.py:496
+msgid "Email уже используется"
+msgstr "Электрондық пошта әлі пайдаланылып жатыр"
+
+#: .\shop\views.py:498
+msgid "Неверный пароль"
+msgstr "Қате пароль"
+
+#: .\shop\views.py:502
+msgid "Email изменен"
+msgstr "Электрондық пошта өзгертілді"
+
+#: .\shop\views.py:509
+msgid "Имя изменено"
+msgstr "Аты өзгертілді"
+
+#: .\shop\views.py:516
+msgid "Фамилия изменена"
+msgstr "Тегі өзгертілді"
+
+#: .\shop\views.py:524
+msgid "Пароль не может быть пустым"
+msgstr "Пароль бос болуы мүмкін емес"
+
+#: .\shop\views.py:526
+msgid "Пароли не совпадают"
+msgstr "Парольдер сәйкес келмейді"
+
+#: .\shop\views.py:528
+msgid "Пароль должен быть минимум 6 символов"
+msgstr "Пароль кемінде 6 таңбадан тұруы керек"
+
+#: .\shop\views.py:533
+msgid "Пароль изменен"
+msgstr "Пароль өзгертілді"
+
+#~ msgid "Действие"
+#~ msgstr "Әрекет"
+
+#~ msgid "В корзине пока нет товаров."
+#~ msgstr "Себетте әлі тауар жоқ."
+
+#~ msgid "Искать"
+#~ msgstr "Іздеу"
+
+#~ msgid "Избранное"
+#~ msgstr "Ең ұнағандар"
+
+#~ msgid "Профиль"
+#~ msgstr "Профиль"
+
+#~ msgid "Оставьте поля пусты, если не хотите менять пароль"
+#~ msgstr "Парольді өзгерткіңіз келмесе, өрістерді бос қойыңыз"
+
+#~ msgid "Оставьте пусто для неизменности"
+#~ msgstr "Өзгеруі үшін бос қойыңыз"
+
+#~ msgid "Товары, которые вы сохранили"
+#~ msgstr "Сіз сақтаған тауарлар"
+
+#~ msgid "В вашем избранном"
+#~ msgstr "Сіздің ең ұнағандарыңызда"
+
+#~ msgid "товар"
+#~ msgstr "тауар"
+
+#~ msgid "товаров"
+#~ msgstr "тауарлар"
+
+#~ msgid "Просмотр"
+#~ msgstr "Көру"
+
+#~ msgid "Удалить товар из избранного?"
+#~ msgstr "Тауарды ең ұнағандарынан шығарудың белгіні?"

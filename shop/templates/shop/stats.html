@@ -1,0 +1,43 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% trans "Статистика" %} - {% trans "Магазин" %}{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h2>{% trans "Статистика" %}</h2>
+
+  <p style="color:#475569;">{% trans "Данные за последние дни" %}</p>
+
+  <div style="background:white; padding:18px; border-radius:12px; box-shadow:0 12px 30px rgba(15,23,42,0.06);">
+    <canvas id="statsCanvas" width="900" height="360" style="width:100%; height:360px; display:block;"></canvas>
+  </div>
+
+  <p style="margin-top:8px; color:#6b7280; font-size:13px;">{% trans "Источник данных: демо" %}</p>
+</div>
+
+<script src="{% static 'shop/stats-chart.js' %}"></script>
+<script>
+  // Fetch data and draw the chart using our custom library
+  (function(){
+    const canvas = document.getElementById('statsCanvas');
+    fetch('{% url "shop:stats_data" %}')
+      .then(r => r.json())
+      .then(data => {
+        // Our library exposes createTimelineChart
+        createBarChart(canvas, data.items, {
+          barColor: '#1e40af',
+          fillColor: 'rgba(59,130,246,0.12)',
+          hoverColor: '#1e3a8a',
+          gridColor: '#e6eefc',
+          dateFormat: 'DD.MM.YYYY'
+        });
+      })
+      .catch(err => {
+        console.error('Failed loading stats data', err);
+      });
+  })();
+</script>
+
+{% endblock %}

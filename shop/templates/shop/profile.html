@@ -1,0 +1,405 @@
+{% extends "shop/base.html" %}
+{% load i18n %}
+
+{% block content %}
+<style>
+  .profile-container {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 30px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .profile-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #e9ecef;
+  }
+
+  .profile-user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .profile-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  .profile-username {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .profile-username h2 {
+    margin: 0;
+    font-size: 20px;
+    color: #333;
+  }
+
+  .profile-role {
+    display: inline-block;
+    font-size: 12px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-top: 5px;
+    font-weight: bold;
+    width: fit-content;
+  }
+
+  .profile-role.admin {
+    background: #fef3c7;
+    color: #92400e;
+  }
+
+  .profile-role.user {
+    background: #dbeafe;
+    color: #1e40af;
+  }
+
+  .profile-section {
+    margin-bottom: 25px;
+  }
+
+  .profile-section h3 {
+    font-size: 16px;
+    color: #495057;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #dee2e6;
+    padding-bottom: 10px;
+  }
+
+  .info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #e9ecef;
+  }
+
+  .info-label {
+    font-weight: 600;
+    color: #495057;
+    font-size: 14px;
+  }
+
+  .info-value {
+    color: #6b7280;
+    font-size: 14px;
+  }
+
+  .info-actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  .btn-edit {
+    padding: 6px 12px;
+    background: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .btn-edit:hover {
+    background: #2563eb;
+    transform: scale(1.02);
+  }
+
+  .edit-form {
+    display: none;
+    background: white;
+    padding: 15px;
+    border-radius: 6px;
+    margin-top: 10px;
+  }
+
+  .edit-form.active {
+    display: block;
+  }
+
+  .form-group {
+    margin-bottom: 12px;
+  }
+
+  .form-group label {
+    display: block;
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 5px;
+    font-size: 13px;
+  }
+
+  .form-group input[type="email"],
+  .form-group input[type="text"],
+  .form-group input[type="password"] {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    font-size: 13px;
+    box-sizing: border-box;
+    font-family: inherit;
+  }
+
+  .form-group input:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  }
+
+  .form-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .btn-save,
+  .btn-cancel-edit {
+    flex: 1;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .btn-save {
+    background: #10b981;
+    color: white;
+  }
+
+  .btn-save:hover {
+    background: #059669;
+    transform: scale(1.02);
+  }
+
+  .btn-cancel-edit {
+    background: #e5e7eb;
+    color: #374151;
+  }
+
+  .btn-cancel-edit:hover {
+    background: #d1d5db;
+  }
+
+  .error-message {
+    background: #fee2e2;
+    color: #991b1b;
+    padding: 10px 12px;
+    border-radius: 4px;
+    margin-bottom: 12px;
+    font-size: 13px;
+  }
+
+  .success-message {
+    background: #d1fae5;
+    color: #065f46;
+    padding: 10px 12px;
+    border-radius: 4px;
+    margin-bottom: 12px;
+    font-size: 13px;
+  }
+
+  @media (max-width: 768px) {
+    .profile-container {
+      margin: 20px;
+      padding: 20px;
+    }
+
+    .profile-header {
+      flex-direction: column;
+      text-align: center;
+      gap: 15px;
+    }
+
+    .info-item {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+    }
+  }
+</style>
+
+<div class="profile-container">
+  <div class="profile-header">
+    <div class="profile-user-info">
+      <div class="profile-avatar">{{ user.username|slice:":1"|upper }}</div>
+      <div class="profile-username">
+        <h2>{{ user.username }}</h2>
+        <span class="profile-role {% if user.profile.role == 'admin' %}admin{% else %}user{% endif %}">
+          {% if user.profile.role == "admin" %}
+            {% trans "Администратор" %}
+          {% else %}
+            {% trans "Пользователь" %}
+          {% endif %}
+        </span>
+      </div>
+    </div>
+  </div>
+
+  {% if messages %}
+    {% for message in messages %}
+      <div class="{% if message.tags %}{{ message.tags }}{% endif %}-message">
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
+
+  <!-- Информация о профиле -->
+  <div class="profile-section">
+    <h3>{% trans "Информация о профиле" %}</h3>
+    
+    <div class="info-item">
+      <div>
+        <div class="info-label">{% trans "Email" %}</div>
+        <div class="info-value">{{ user.email }}</div>
+      </div>
+      <div class="info-actions">
+        <button type="button" class="btn-edit" onclick="toggleEditForm('email-form')">{% trans "Изменить" %}</button>
+      </div>
+    </div>
+
+    <!-- Форма редактирования Email -->
+    <form method="post" id="email-form" class="edit-form">
+      {% csrf_token %}
+      <input type="hidden" name="action" value="change_email">
+      <div class="form-group">
+        <label for="new_email">{% trans "Новый Email" %}</label>
+        <input type="email" id="new_email" name="new_email" required>
+      </div>
+      <div class="form-group">
+        <label for="password_confirm">{% trans "Подтверждение пароля" %}</label>
+        <input type="password" id="password_confirm" name="password_confirm" placeholder="{% trans 'Введите пароль для подтверждения' %}" required>
+      </div>
+      <div class="form-actions">
+        <button type="submit" class="btn-save">{% trans "Сохранить" %}</button>
+        <button type="button" class="btn-cancel-edit" onclick="toggleEditForm('email-form')">{% trans "Отмена" %}</button>
+      </div>
+    </form>
+
+    <div class="info-item">
+      <div>
+        <div class="info-label">{% trans "Имя" %}</div>
+        <div class="info-value">{{ user.first_name|default:"—" }}</div>
+      </div>
+      <div class="info-actions">
+        <button type="button" class="btn-edit" onclick="toggleEditForm('name-form')">{% trans "Изменить" %}</button>
+      </div>
+    </div>
+
+    <!-- Форма редактирования Имени -->
+    <form method="post" id="name-form" class="edit-form">
+      {% csrf_token %}
+      <input type="hidden" name="action" value="change_name">
+      <div class="form-group">
+        <label for="first_name">{% trans "Имя" %}</label>
+        <input type="text" id="first_name" name="first_name" value="{{ user.first_name }}">
+      </div>
+      <div class="form-actions">
+        <button type="submit" class="btn-save">{% trans "Сохранить" %}</button>
+        <button type="button" class="btn-cancel-edit" onclick="toggleEditForm('name-form')">{% trans "Отмена" %}</button>
+      </div>
+    </form>
+
+    <div class="info-item">
+      <div>
+        <div class="info-label">{% trans "Фамилия" %}</div>
+        <div class="info-value">{{ user.last_name|default:"—" }}</div>
+      </div>
+      <div class="info-actions">
+        <button type="button" class="btn-edit" onclick="toggleEditForm('lastname-form')">{% trans "Изменить" %}</button>
+      </div>
+    </div>
+
+    <!-- Форма редактирования Фамилии -->
+    <form method="post" id="lastname-form" class="edit-form">
+      {% csrf_token %}
+      <input type="hidden" name="action" value="change_lastname">
+      <div class="form-group">
+        <label for="last_name">{% trans "Фамилия" %}</label>
+        <input type="text" id="last_name" name="last_name" value="{{ user.last_name }}">
+      </div>
+      <div class="form-actions">
+        <button type="submit" class="btn-save">{% trans "Сохранить" %}</button>
+        <button type="button" class="btn-cancel-edit" onclick="toggleEditForm('lastname-form')">{% trans "Отмена" %}</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Смена пароля -->
+  <div class="profile-section">
+    <h3>{% trans "Смена пароля" %}</h3>
+    
+    <div class="info-item">
+      <div>
+        <div class="info-label">{% trans "Пароль" %}</div>
+        <div class="info-value" style="font-size:20px;">••••••••</div>
+      </div>
+      <div class="info-actions">
+        <button type="button" class="btn-edit" onclick="toggleEditForm('password-form')">{% trans "Изменить" %}</button>
+      </div>
+    </div>
+
+    <!-- Форма смены пароля -->
+    <form method="post" id="password-form" class="edit-form">
+      {% csrf_token %}
+      <input type="hidden" name="action" value="change_password">
+      <div class="form-group">
+        <label for="new_password">{% trans "Новый пароль" %}</label>
+        <input type="password" id="new_password" name="new_password" required>
+      </div>
+      <div class="form-group">
+        <label for="confirm_password">{% trans "Подтверждение пароля" %}</label>
+        <input type="password" id="confirm_password" name="confirm_password" placeholder="{% trans 'Повторите пароль' %}" required>
+      </div>
+      <div class="form-actions">
+        <button type="submit" class="btn-save">{% trans "Сохранить" %}</button>
+        <button type="button" class="btn-cancel-edit" onclick="toggleEditForm('password-form')">{% trans "Отмена" %}</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Избранное -->
+  <div class="profile-section">
+    <h3>❤️ {% trans "Мое избранное" %}</h3>
+    
+    <div style="display:flex; gap:10px; margin-bottom:15px;">
+      <a href="{% url 'shop:wishlist' %}" class="btn-edit" style="flex:1; text-align:center; text-decoration:none; padding:10px 12px; display:inline-block;">
+        {% trans "Просмотреть избранное" %} →
+      </a>
+    </div>
+    
+    <p style="color:#6b7280; font-size:13px;">
+      {% trans "Сохраняйте понравившиеся товары в избранное, чтобы найти их позже. Нажимайте на значок сердца на карточке товара." %}
+    </p>
+  </div>
+</div>
+
+<script>
+  function toggleEditForm(formId) {
+    const form = document.getElementById(formId);
+    form.classList.toggle('active');
+  }
+</script>
+{% endblock %}

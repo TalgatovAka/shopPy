@@ -1,0 +1,50 @@
+{% extends "shop/base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Админ-панель" %} - {% trans "Магазин" %}{% endblock %}
+{% block content %}
+
+<h2>{% trans "Админ-панель" %}</h2>
+
+<table style="width:100%; border-collapse:collapse; margin-top:20px; background:white; border-radius:12px; overflow:hidden; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);">
+    <thead>
+        <tr style="background:linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); color:white;">
+            <th style="padding:14px 16px; text-align:left; font-weight:700; text-transform:uppercase; font-size:12px; letter-spacing:0.5px;">ID</th>
+            <th style="padding:14px 16px; text-align:left; font-weight:700; text-transform:uppercase; font-size:12px; letter-spacing:0.5px;">{% trans "Имя пользователя" %}</th>
+            <th style="padding:14px 16px; text-align:left; font-weight:700; text-transform:uppercase; font-size:12px; letter-spacing:0.5px;">Email</th>
+            <th style="padding:14px 16px; text-align:left; font-weight:700; text-transform:uppercase; font-size:12px; letter-spacing:0.5px;">{% trans "Роль" %}</th>
+            <th style="padding:14px 16px; text-align:left; font-weight:700; text-transform:uppercase; font-size:12px; letter-spacing:0.5px;">{% trans "Действия" %}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr style="border-bottom:1px solid #e2e8f0; transition:all 0.3s ease;" onmouseover="this.style.background='#f0f9ff'" onmouseout="this.style.background='white'">
+            <td style="padding:14px 16px; color:#4b5563;">{{ user.id }}</td>
+            <td style="padding:14px 16px; color:#1f2937; font-weight:600;">{{ user.username }}</td>
+            <td style="padding:14px 16px; color:#4b5563; font-size:13px;">{{ user.email }}</td>
+            <td style="padding:14px 16px;">
+                <span style="padding:6px 12px; border-radius:6px; font-weight:700; font-size:11px; text-transform:uppercase; letter-spacing:0.5px; {% if user.profile.role == 'admin' %}background:#dc2626; color:white;{% else %}background:#10b981; color:white;{% endif %}">
+                    {% if user.profile.role == 'admin' %}{% trans "Админ" %}{% else %}{% trans "Пользователь" %}{% endif %}
+                </span>
+            </td>
+            <td style="padding:14px 16px;">
+                <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                    <a href="{% url 'shop:user_cart' user.id %}" style="padding:8px 14px; background:linear-gradient(135deg, #06b6d4 0%, #0891b2 100%); color:white; text-decoration:none; border-radius:6px; font-weight:700; font-size:11px; text-transform:uppercase; letter-spacing:0.5px; transition:all 0.3s ease; box-shadow: 0 4px 12px rgba(6, 182, 212, 0.3); display:inline-block;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 16px rgba(6, 182, 212, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(6, 182, 212, 0.3)';" >{% trans "Корзина" %}</a>
+                    {% if user.id != request.user.id %}
+                    <a href="{% url 'shop:toggle_admin_role' user.id %}" style="padding:8px 14px; {% if user.profile.role == 'admin' %}background:linear-gradient(135deg, #ef4444 0%, #dc2626 100%);{% else %}background:linear-gradient(135deg, #eab308 0%, #ca8a04 100%);{% endif %} color:white; text-decoration:none; border-radius:6px; font-weight:700; font-size:11px; text-transform:uppercase; letter-spacing:0.5px; transition:all 0.3s ease; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); display:inline-block;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 16px rgba(0, 0, 0, 0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(0, 0, 0, 0.2)';" >
+                        {% if user.profile.role == 'admin' %}{% trans "Убрать админа" %}{% else %}{% trans "Дать админа" %}{% endif %}
+                    </a>
+                    {% else %}
+                    <span style="color:#9ca3af; font-size:11px;">-</span>
+                    {% endif %}
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div style="margin-top:20px;">
+    <a href="{% url 'shop:index' %}" style="padding:12px 24px; background:linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); color:white; text-decoration:none; border-radius:8px; font-weight:700; font-size:13px; text-transform:uppercase; letter-spacing:0.5px; transition:all 0.3s ease; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3); display:inline-block;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 16px rgba(59, 130, 246, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(59, 130, 246, 0.3)';" >{% trans "Вернуться на главную" %}</a>
+</div>
+
+{% endblock %}

@@ -1,0 +1,420 @@
+{% extends "shop/base.html" %}
+{% load i18n %}
+{% load humanize %}
+{% block title %}{% trans "Корзина" %}{% endblock %}
+{% block content %}
+
+<style>
+  .cart-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 30px 20px;
+  }
+
+  .cart-header {
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
+  .cart-header h1 {
+    font-size: 32px;
+    color: #1f2937;
+    margin: 0 0 10px 0;
+  }
+
+  .cart-empty {
+    text-align: center;
+    padding: 60px 20px;
+    background: #f9fafb;
+    border-radius: 8px;
+    margin: 30px 0;
+  }
+
+  .cart-empty-icon {
+    font-size: 60px;
+    margin-bottom: 15px;
+  }
+
+  .cart-empty h2 {
+    font-size: 24px;
+    color: #1f2937;
+    margin: 0 0 10px 0;
+  }
+
+  .cart-empty p {
+    color: #6b7280;
+    margin: 0 0 20px 0;
+  }
+
+  .cart-empty a {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #3b82f6;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .cart-empty a:hover {
+    background: #2563eb;
+    transform: translateY(-2px);
+  }
+
+  .cart-items {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 30px;
+  }
+
+  .cart-item {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    padding: 15px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+
+  .cart-item:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .cart-item-image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 6px;
+    background: #f3f4f6;
+  }
+
+  .cart-item-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .cart-item-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 6px;
+    word-break: break-word;
+  }
+
+  .cart-item-price {
+    font-size: 14px;
+    color: #6b7280;
+    margin-bottom: 6px;
+  }
+
+  .cart-item-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .cart-qty-controls {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    background: #f3f4f6;
+    border-radius: 6px;
+    padding: 4px;
+  }
+
+  .qty-btn-small {
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 12px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .qty-minus {
+    background: #ef4444;
+    color: white;
+  }
+
+  .qty-minus:hover {
+    background: #dc2626;
+    transform: scale(1.05);
+  }
+
+  .qty-plus {
+    background: #10b981;
+    color: white;
+  }
+
+  .qty-plus:hover {
+    background: #059669;
+    transform: scale(1.05);
+  }
+
+  .qty-value {
+    min-width: 28px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  .cart-item-total {
+    font-weight: 600;
+    color: #1f2937;
+    min-width: 80px;
+    text-align: right;
+  }
+
+  .cart-remove-btn {
+    background: #ef4444;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 12px;
+    transition: all 0.2s ease;
+  }
+
+  .cart-remove-btn:hover {
+    background: #dc2626;
+    transform: scale(1.05);
+  }
+
+  .cart-summary {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .cart-summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    font-size: 15px;
+  }
+
+  .cart-summary-total {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 2px solid #e5e7eb;
+    font-size: 18px;
+    font-weight: 700;
+    color: #1f2937;
+  }
+
+  .checkout-btn {
+    display: block;
+    width: 100%;
+    margin-top: 15px;
+    padding: 12px;
+    background: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .checkout-btn:hover {
+    background: #2563eb;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  }
+
+  @media (max-width: 600px) {
+    .cart-item {
+      flex-wrap: wrap;
+    }
+
+    .cart-item-image {
+      width: 70px;
+      height: 70px;
+    }
+
+    .cart-item-total {
+      min-width: 60px;
+    }
+
+    .cart-qty-controls {
+      order: 3;
+      flex-basis: 100%;
+      margin-top: 10px;
+    }
+  }
+</style>
+
+<div class="cart-container">
+  <div class="cart-header">
+    <h1>🛒 {% trans "Ваша корзина" %}</h1>
+  </div>
+
+  {% if items %}
+    <div class="cart-items">
+      {% for item in items %}
+        {% if item.product %}
+        <div class="cart-item">
+          {% if item.product.photo %}
+            <img src="{{ item.product.photo.url }}" alt="{{ item.product.name }}" class="cart-item-image">
+          {% else %}
+            <div class="cart-item-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center;">
+              <span style="font-size: 30px; color: rgba(255, 255, 255, 0.5);">📦</span>
+            </div>
+          {% endif %}
+          
+          <div class="cart-item-info">
+            <div class="cart-item-name">{{ item.product.name }}</div>
+            <div class="cart-item-price">{{ item.product.price|floatformat:0|intcomma }} ₸</div>
+          </div>
+
+          <div class="cart-item-actions">
+            <div class="cart-qty-controls">
+              <button type="button" class="qty-btn-small qty-minus" data-product-id="{{ item.product.pk }}" onclick="decreaseQty({{ item.product.pk }})">−</button>
+              <span class="qty-value" id="qty-{{ item.product.pk }}">{{ item.quantity }}</span>
+              <button type="button" class="qty-btn-small qty-plus" data-product-id="{{ item.product.pk }}" onclick="increaseQty({{ item.product.pk }})">+</button>
+            </div>
+
+            <div class="cart-item-total" id="subtotal-{{ item.product.pk }}">{{ item.subtotal|floatformat:0|intcomma }} ₸</div>
+
+            <button type="button" class="cart-remove-btn" onclick="removeFromCart({{ item.product.pk }})">{% trans "Удалить" %}</button>
+          </div>
+        </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <div class="cart-summary">
+      <div class="cart-summary-row">
+        <span>{% trans "Количество товаров" %}:</span>
+        <span id="total-items">{{ items|length }}</span>
+      </div>
+      <div class="cart-summary-total">
+        <span>{% trans "Итого" %}:</span>
+        <span id="total-price">{{ total|floatformat:0|intcomma }} ₸</span>
+      </div>
+      <button class="checkout-btn">{% trans "Оформить заказ" %}</button>
+    </div>
+
+  {% else %}
+    <div class="cart-empty">
+      <div class="cart-empty-icon">🛒</div>
+      <h2>{% trans "Ваша корзина пуста" %}</h2>
+      <p>{% trans "Добавьте товары в корзину для оформления заказа" %}</p>
+      <a href="{% url 'shop:index' %}">{% trans "Перейти в каталог" %}</a>
+    </div>
+  {% endif %}
+</div>
+
+<script>
+function getLangPrefix() {
+    const parts = window.location.pathname.split('/');
+    const lang = parts[1] || '';
+    return lang ? `/${lang}` : '';
+}
+
+function updateCartDisplay() {
+    const prefix = getLangPrefix();
+    fetch(`${prefix}/cart/state/`, {
+        method: 'GET',
+        headers: {'X-Requested-With': 'XMLHttpRequest'}
+    })
+    .then(r => r.json())
+    .then(data => {
+        if (data.items) {
+            let totalItems = 0;
+            let totalPrice = 0;
+            
+            Object.entries(data.items).forEach(([productId, qty]) => {
+                const qtyElement = document.getElementById(`qty-${productId}`);
+                const subtotalElement = document.getElementById(`subtotal-${productId}`);
+                
+                if (qtyElement) {
+                    qtyElement.textContent = qty;
+                    totalItems += qty;
+                    
+                    // Calculate subtotal (you'd need product price in the data structure or fetch it)
+                    const priceElement = document.querySelector(`[data-product-id="${productId}"]`)?.closest('.cart-item')?.querySelector('.cart-item-price');
+                    if (priceElement) {
+                        const price = parseInt(priceElement.textContent);
+                        const subtotal = price * qty;
+                        if (subtotalElement) {
+                            subtotalElement.textContent = subtotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' ₸';
+                            totalPrice += subtotal;
+                        }
+                    }
+                }
+            });
+            
+            const totalItemsEl = document.getElementById('total-items');
+            const totalPriceEl = document.getElementById('total-price');
+            if (totalItemsEl) totalItemsEl.textContent = totalItems;
+            if (totalPriceEl) totalPriceEl.textContent = totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' ₸';
+        }
+    })
+    .catch(err => console.error('Error updating cart:', err));
+}
+
+function increaseQty(productId) {
+    updateQuantityAJAX(productId, 'increase');
+}
+
+function decreaseQty(productId) {
+    updateQuantityAJAX(productId, 'decrease');
+}
+
+function updateQuantityAJAX(productId, action) {
+    const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]')?.value || 
+                      document.cookie.split('; ').find(row => row.startsWith('csrftoken='))?.split('=')[1];
+    
+    const prefix = getLangPrefix();
+    fetch(`${prefix}/cart/update/${productId}/${action}/`, {
+        method: 'POST',
+        headers: {'X-CSRFToken': csrfToken, 'X-Requested-With': 'XMLHttpRequest'}
+    })
+    .then(r => r.json())
+    .then(data => {
+        if (data.success) {
+            updateCartDisplay();
+        }
+    })
+    .catch(err => console.error('Error:', err));
+}
+
+function removeFromCart(productId) {
+    const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]')?.value || 
+                      document.cookie.split('; ').find(row => row.startsWith('csrftoken='))?.split('=')[1];
+    
+    const prefix = getLangPrefix();
+    fetch(`${prefix}/cart/remove/${productId}/`, {
+        method: 'POST',
+        headers: {'X-CSRFToken': csrfToken, 'X-Requested-With': 'XMLHttpRequest'}
+    })
+    .then(r => r.json())
+    .then(data => {
+        if (data.success) {
+            location.reload();
+        }
+    })
+    .catch(err => {
+        location.reload();
+    });
+}
+</script>
+
+{% endblock %}

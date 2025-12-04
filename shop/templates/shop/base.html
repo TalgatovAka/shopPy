@@ -1,0 +1,115 @@
+{% load static %}
+{% load i18n %}
+<!doctype html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{% block title %}{% trans "Магазин" %}{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'shop/style.css' %}?v=104">
+</head>
+<body style="margin:0 !important; padding:0 !important;">
+  <header style="display:flex !important; justify-content:space-between !important; align-items:center !important; padding:16px 24px !important; background:linear-gradient(135deg, #3b82f6 0%, #2563eb 100%) !important; border-bottom:none !important; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15) !important; gap: 12px !important;">
+    <div style="display:flex; align-items:center; gap:12px;">
+      <h1 style="margin:0 !important; font-size:24px !important; font-weight:800 !important; white-space:nowrap;"><a href="{% url 'shop:index' %}" style="color:white !important; text-decoration:none !important;">🛍️ {% trans "Магазин" %}</a></h1>
+      <!-- Переключатель языков рядом с логотипом -->
+      <div class="lang-switcher" style="height:32px; display:flex; align-items:center;">
+        <form action="{% url 'set-language' %}" method="post" style="display:inline; margin:0;">
+          {% csrf_token %}
+          <select name="language" style="padding:6px 8px; border-radius:6px; border:1px solid rgba(255,255,255,0.3); cursor:pointer; font-weight:600; background:linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.15) 100%); color:white; transition: all 0.2s ease; box-shadow: 0 2px 8px rgba(0,0,0,0.15); font-size:12px; height:32px; line-height:1.5;" onchange="this.form.submit();" onmouseover="this.style.background='linear-gradient(135deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.25) 100%)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.2)';" onmouseout="this.style.background='linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.15) 100%)'; this.style.boxShadow='0 2px 8px rgba(0,0,0,0.15)';">
+            <option value="kk" {% if request.LANGUAGE_CODE == 'kk' %}selected{% endif %} style="background:#2c3e7f; color:white;">kk</option>
+            <option value="ru" {% if request.LANGUAGE_CODE == 'ru' %}selected{% endif %} style="background:#2c3e7f; color:white;">ru</option>
+            <option value="en" {% if request.LANGUAGE_CODE == 'en' %}selected{% endif %} style="background:#2c3e7f; color:white;">en</option>
+          </select>
+        </form>
+      </div>
+    </div>
+    <nav class="header-nav" style="display:flex !important; gap:6px !important; font-size:13px !important; align-items:center !important; margin-left:auto;">
+      {% if user.is_authenticated %}
+        <a href="{% url 'shop:profile' %}" class="avatar header-link" title="{{ user.username }}" style="color:inherit;">
+          <div class="avatar-circle">{{ user.username|slice:":1"|upper }}</div>
+        </a>
+        
+        {% if user.profile.role == "admin" %}
+        <a class="header-link" href="{% url 'shop:admin_panel' %}" style="color:white !important; text-decoration:none !important; font-weight:600 !important; padding:6px 8px !important;">{% trans "Админ" %}</a>
+        {% else %}
+        <a class="header-link" href="{% url 'shop:view_cart' %}" style="color:white !important; text-decoration:none !important; font-weight:600 !important; padding:6px 8px !important;">{% trans "Корзина" %}</a>
+        {% endif %}
+        {% if user.profile.role == "admin" %}
+        <a class="header-link" href="{% url 'shop:product_add' %}" style="color:white !important; text-decoration:none !important; font-weight:600 !important; padding:6px 8px !important;">{% trans "Добавить" %}</a>
+        {% endif %}
+        
+        <!-- Статистика (доступна всем) -->
+        <a class="header-link" href="{% url 'shop:stats' %}" style="color:white !important; text-decoration:none !important; font-weight:600 !important; padding:6px 8px !important;">{% trans "Статистика" %}</a>
+        
+        <!-- Кнопка Выйти в правом углу с особым стилем -->
+        <a class="header-link btn-logout" href="{% url 'shop:logout' %}" style="color:white !important; text-decoration:none !important; font-weight:600 !important; padding:6px 8px !important; margin-left:auto; background:rgba(239,68,68,0.15) !important; border:1px solid rgba(239,68,68,0.3);">{% trans "Выйти" %}</a>
+      {% else %}
+        <a class="header-link btn-auth" href="{% url 'shop:register' %}" style="color:white !important; text-decoration:none !important; font-weight:600 !important; padding:6px 8px !important; background:rgba(34,197,94,0.15) !important; border:1px solid rgba(34,197,94,0.3);">{% trans "Регистрация" %}</a>
+        <a class="header-link btn-auth" href="{% url 'shop:login' %}" style="color:white !important; text-decoration:none !important; font-weight:600 !important; padding:6px 8px !important; background:rgba(34,197,94,0.15) !important; border:1px solid rgba(34,197,94,0.3);">{% trans "Войти" %}</a>
+        
+        <!-- Статистика (доступна всем) -->
+        <a class="header-link" href="{% url 'shop:stats' %}" style="color:white !important; text-decoration:none !important; font-weight:600 !important; padding:6px 8px !important;">{% trans "Статистика" %}</a>
+      {% endif %}
+    </nav>
+  </header>
+
+  <main style="padding:20px !important; background:#f8fafc !important;">
+    {% if messages %}
+      <ul class="messages">
+        {% for message in messages %}
+          <li class="{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Toast Notifications Container -->
+  <div id="toast-container" style="position:fixed; bottom:20px; right:20px; z-index:9999; display:flex; flex-direction:column; gap:10px;"></div>
+
+  <script>
+    function showToast(message, actionText, actionUrl, type = 'success') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      
+      const bgColor = type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : '#3b82f6';
+      const icon = type === 'success' ? '✓' : type === 'error' ? '✕' : 'ℹ';
+      
+      toast.style.cssText = `
+        background:${bgColor}; color:white; padding:12px 16px; border-radius:8px; 
+        box-shadow:0 4px 12px rgba(0,0,0,0.15); display:flex; align-items:center; 
+        gap:12px; font-size:14px; font-weight:500; animation:slideIn 0.3s ease;
+        min-width:300px; max-width:400px;
+      `;
+      
+      let content = `<span>${icon}</span><span>${message}</span>`;
+      if (actionText && actionUrl) {
+        content += `<a href="${actionUrl}" style="color:white; text-decoration:underline; margin-left:auto; white-space:nowrap; cursor:pointer; font-weight:600;">${actionText}</a>`;
+      }
+      
+      toast.innerHTML = content;
+      container.appendChild(toast);
+      
+      setTimeout(() => {
+        toast.style.animation = 'slideOut 0.3s ease';
+        setTimeout(() => toast.remove(), 300);
+      }, 4000);
+    }
+
+    // Add CSS animations
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes slideIn {
+        from { transform: translateX(400px); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+      }
+      @keyframes slideOut {
+        from { transform: translateX(0); opacity: 1; }
+        to { transform: translateX(400px); opacity: 0; }
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
+</body>
+</html>

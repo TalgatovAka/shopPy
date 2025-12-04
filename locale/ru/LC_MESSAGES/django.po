@@ -1,0 +1,593 @@
+# Russian translations
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-04 13:22+0500\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: .\shop\templates\shop\admin_panel.html:3
+#: .\shop\templates\shop\admin_panel.html:6
+msgid "Админ-панель"
+msgstr "Админ-панель"
+
+#: .\shop\templates\shop\admin_panel.html:3 .\shop\templates\shop\base.html:8
+#: .\shop\templates\shop\base.html:14 .\shop\templates\shop\index.html:4
+#: .\shop\templates\shop\stats.html:5 .\shop\templates\shop\user_cart.html:3
+msgid "Магазин"
+msgstr "Магазин"
+
+#: .\shop\templates\shop\admin_panel.html:12
+msgid "Имя пользователя"
+msgstr "Имя пользователя"
+
+#: .\shop\templates\shop\admin_panel.html:14
+msgid "Роль"
+msgstr "Роль"
+
+#: .\shop\templates\shop\admin_panel.html:15
+msgid "Действия"
+msgstr "Действия"
+
+#: .\shop\templates\shop\admin_panel.html:26
+#: .\shop\templates\shop\base.html:34
+msgid "Админ"
+msgstr "Админ"
+
+#: .\shop\templates\shop\admin_panel.html:26
+#: .\shop\templates\shop\profile.html:254
+msgid "Пользователь"
+msgstr "Пользователь"
+
+#: .\shop\templates\shop\admin_panel.html:31
+#: .\shop\templates\shop\base.html:36 .\shop\templates\shop\cart.html:4
+#: .\shop\templates\shop\user_cart.html:3
+msgid "Корзина"
+msgstr "Корзина"
+
+#: .\shop\templates\shop\admin_panel.html:34
+msgid "Убрать админа"
+msgstr "Убрать админа"
+
+#: .\shop\templates\shop\admin_panel.html:34
+msgid "Дать админа"
+msgstr "Дать админа"
+
+#: .\shop\templates\shop\admin_panel.html:47
+msgid "Вернуться на главную"
+msgstr "Вернуться на главную"
+
+#: .\shop\templates\shop\base.html:39 .\shop\templates\shop\index.html:86
+msgid "Добавить"
+msgstr "Добавить"
+
+#: .\shop\templates\shop\base.html:43 .\shop\templates\shop\base.html:52
+#: .\shop\templates\shop\stats.html:5 .\shop\templates\shop\stats.html:9
+msgid "Статистика"
+msgstr "Статистика"
+
+#: .\shop\templates\shop\base.html:46
+msgid "Выйти"
+msgstr "Выйти"
+
+#: .\shop\templates\shop\base.html:48 .\shop\templates\shop\index.html:161
+#: .\shop\templates\shop\register.html:7
+msgid "Регистрация"
+msgstr "Регистрация"
+
+#: .\shop\templates\shop\base.html:49 .\shop\templates\shop\login.html:7
+#: .\shop\templates\shop\login.html:30 .\shop\templates\shop\register.html:32
+msgid "Войти"
+msgstr "Войти"
+
+#: .\shop\templates\shop\cart.html:265
+msgid "Ваша корзина"
+msgstr "Ваша корзина"
+
+#: .\shop\templates\shop\cart.html:295 .\shop\templates\shop\index.html:102
+msgid "Удалить"
+msgstr "Удалить"
+
+#: .\shop\templates\shop\cart.html:304
+#, fuzzy
+#| msgid "Количество"
+msgid "Количество товаров"
+msgstr "Количество"
+
+#: .\shop\templates\shop\cart.html:308
+msgid "Итого"
+msgstr "Итого"
+
+#: .\shop\templates\shop\cart.html:311
+msgid "Оформить заказ"
+msgstr "Оформить заказ"
+
+#: .\shop\templates\shop\cart.html:317
+#, fuzzy
+#| msgid "Ваша корзина"
+msgid "Ваша корзина пуста"
+msgstr "Ваша корзина"
+
+#: .\shop\templates\shop\cart.html:318
+#, fuzzy
+#| msgid "Добавьте товары в избранное, чтобы вернуться к ним позже"
+msgid "Добавьте товары в корзину для оформления заказа"
+msgstr "Добавьте товары в избранное, чтобы вернуться к ним позже"
+
+#: .\shop\templates\shop\cart.html:319 .\shop\templates\shop\wishlist.html:328
+msgid "Перейти в каталог"
+msgstr "Перейти в каталог"
+
+#: .\shop\templates\shop\index.html:4
+msgid "Главная"
+msgstr "Главная"
+
+#: .\shop\templates\shop\index.html:9
+msgid "Поиск товара..."
+msgstr "Поиск товара..."
+
+#: .\shop\templates\shop\index.html:28
+msgid "Все товары"
+msgstr "Все товары"
+
+#: .\shop\templates\shop\index.html:29
+#, fuzzy
+#| msgid "Сначала дешевые"
+msgid "Дешевые"
+msgstr "Сначала дешевые"
+
+#: .\shop\templates\shop\index.html:30
+#, fuzzy
+#| msgid "Сначала дорогие"
+msgid "Дорогие"
+msgstr "Сначала дорогие"
+
+#: .\shop\templates\shop\index.html:58 .\shop\templates\shop\index.html:136
+msgid "Производитель"
+msgstr "Производитель"
+
+#: .\shop\templates\shop\index.html:62 .\shop\templates\shop\index.html:140
+msgid "Год выпуска"
+msgstr "Год выпуска"
+
+#: .\shop\templates\shop\index.html:66 .\shop\templates\shop\index.html:144
+msgid "Вес"
+msgstr "Вес"
+
+#: .\shop\templates\shop\index.html:67
+msgid "кг"
+msgstr "кг"
+
+#: .\shop\templates\shop\index.html:101 .\shop\templates\shop\profile.html:279
+#: .\shop\templates\shop\profile.html:307
+#: .\shop\templates\shop\profile.html:331
+#: .\shop\templates\shop\profile.html:360
+msgid "Изменить"
+msgstr "Изменить"
+
+#: .\shop\templates\shop\index.html:110
+msgid "Пока нет товаров."
+msgstr "Пока нет товаров."
+
+#: .\shop\templates\shop\index.html:116
+msgid "Удалить товар?"
+msgstr "Удалить товар?"
+
+#: .\shop\templates\shop\index.html:117
+msgid "Это действие нельзя отменить."
+msgstr "Это действие нельзя отменить."
+
+#: .\shop\templates\shop\index.html:120
+msgid "Да, удалить"
+msgstr "Да, удалить"
+
+#: .\shop\templates\shop\index.html:122 .\shop\templates\shop\profile.html:297
+#: .\shop\templates\shop\profile.html:321
+#: .\shop\templates\shop\profile.html:345
+#: .\shop\templates\shop\profile.html:378
+msgid "Отмена"
+msgstr "Отмена"
+
+#: .\shop\templates\shop\index.html:148
+msgid "Цена"
+msgstr "Цена"
+
+#: .\shop\templates\shop\index.html:159
+msgid "Войдите или зарегистрируйтесь, чтобы добавить товар в корзину."
+msgstr "Войдите или зарегистрируйтесь, чтобы добавить товар в корзину."
+
+#: .\shop\templates\shop\index.html:160
+msgid "Вход"
+msgstr "Вход"
+
+#: .\shop\templates\shop\index.html:166
+msgid "Вы администратор. Редактируйте товар из страницы списка."
+msgstr "Вы администратор. Редактируйте товар из страницы списка."
+
+#: .\shop\templates\shop\index.html:171
+msgid "Добавить в корзину"
+msgstr "Добавить в корзину"
+
+#: .\shop\templates\shop\index.html:177
+msgid "Закрыть"
+msgstr "Закрыть"
+
+#: .\shop\templates\shop\index.html:296
+#: .\shop\templates\shop\wishlist.html:401
+#, fuzzy
+#| msgid "Добавить"
+msgid "Добавляю..."
+msgstr "Добавить"
+
+#: .\shop\templates\shop\index.html:313 .\shop\templates\shop\index.html:460
+#: .\shop\templates\shop\index.html:522
+#, fuzzy
+#| msgid "Закрыть"
+msgid "Открыть"
+msgstr "Закрыть"
+
+#: .\shop\templates\shop\index.html:323
+msgid "Ошибка при добавлении"
+msgstr "Ошибка при добавлении"
+
+#: .\shop\templates\shop\login.html:10
+msgid "Вы сейчас авторизованы как"
+msgstr "Вы сейчас авторизованы как"
+
+#: .\shop\templates\shop\login.html:10
+#, fuzzy
+#| msgid ""
+#| "Если хотите войти другим аккаунтом — нажмите \"Выйти\" и снова введите "
+#| "данные."
+msgid "Если хотите войти другим аккаунтом — нажмите \\"
+msgstr ""
+"Если хотите войти другим аккаунтом — нажмите \"Выйти\" и снова введите "
+"данные."
+
+#: .\shop\templates\shop\login.html:36
+msgid "Войти через Keycloak"
+msgstr "Войти через Keycloak"
+
+#: .\shop\templates\shop\login.html:39
+msgid "Нет аккаунта?"
+msgstr "Нет аккаунта?"
+
+#: .\shop\templates\shop\login.html:39 .\shop\templates\shop\register.html:29
+msgid "Зарегистрироваться"
+msgstr "Зарегистрироваться"
+
+#: .\shop\templates\shop\product_form.html:11
+#: .\shop\templates\shop\profile.html:296
+#: .\shop\templates\shop\profile.html:320
+#: .\shop\templates\shop\profile.html:344
+#: .\shop\templates\shop\profile.html:377
+msgid "Сохранить"
+msgstr "Сохранить"
+
+#: .\shop\templates\shop\profile.html:252
+msgid "Администратор"
+msgstr "Администратор"
+
+#: .\shop\templates\shop\profile.html:271
+msgid "Информация о профиле"
+msgstr "Информация о профиле"
+
+#: .\shop\templates\shop\profile.html:275
+msgid "Email"
+msgstr "Email"
+
+#: .\shop\templates\shop\profile.html:288
+msgid "Новый Email"
+msgstr "Новый Email"
+
+#: .\shop\templates\shop\profile.html:292
+#: .\shop\templates\shop\profile.html:373
+msgid "Подтверждение пароля"
+msgstr "Подтверждение пароля"
+
+#: .\shop\templates\shop\profile.html:293
+msgid "Введите пароль для подтверждения"
+msgstr "Введите пароль для подтверждения"
+
+#: .\shop\templates\shop\profile.html:303
+#: .\shop\templates\shop\profile.html:316
+msgid "Имя"
+msgstr "Имя"
+
+#: .\shop\templates\shop\profile.html:327
+#: .\shop\templates\shop\profile.html:340
+msgid "Фамилия"
+msgstr "Фамилия"
+
+#: .\shop\templates\shop\profile.html:352
+msgid "Смена пароля"
+msgstr "Смена пароля"
+
+#: .\shop\templates\shop\profile.html:356
+#, fuzzy
+#| msgid "Новый пароль"
+msgid "Пароль"
+msgstr "Новый пароль"
+
+#: .\shop\templates\shop\profile.html:369
+msgid "Новый пароль"
+msgstr "Новый пароль"
+
+#: .\shop\templates\shop\profile.html:374
+msgid "Повторите пароль"
+msgstr "Повторите пароль"
+
+#: .\shop\templates\shop\profile.html:385
+#: .\shop\templates\shop\wishlist.html:289
+msgid "Мое избранное"
+msgstr "Мое избранное"
+
+#: .\shop\templates\shop\profile.html:389
+#, fuzzy
+#| msgid "Мое избранное"
+msgid "Просмотреть избранное"
+msgstr "Мое избранное"
+
+#: .\shop\templates\shop\profile.html:394
+msgid ""
+"Сохраняйте понравившиеся товары в избранное, чтобы найти их позже. Нажимайте"
+" на значок сердца на карточке товара."
+msgstr ""
+"Сохраняйте понравившиеся товары в избранное, чтобы найти их позже. Нажимайте"
+" на значок сердца на карточке товара."
+
+#: .\shop\templates\shop\register.html:32
+msgid "Уже есть аккаунт?"
+msgstr "Уже есть аккаунт?"
+
+#: .\shop\templates\shop\stats.html:11
+msgid "Данные за последние дни"
+msgstr "Данные за последние дни"
+
+#: .\shop\templates\shop\stats.html:17
+msgid "Источник данных: демо"
+msgstr "Источник данных: демо"
+
+#: .\shop\templates\shop\user_cart.html:6
+#, fuzzy
+#| msgid "Имя пользователя"
+msgid "Корзина пользователя:"
+msgstr "Имя пользователя"
+
+#: .\shop\templates\shop\user_cart.html:12
+msgid "Товар"
+msgstr "Товар"
+
+#: .\shop\templates\shop\user_cart.html:13
+msgid "Количество"
+msgstr "Количество"
+
+#: .\shop\templates\shop\user_cart.html:14
+msgid "Цена за единицу"
+msgstr "Цена за единицу"
+
+#: .\shop\templates\shop\user_cart.html:15
+msgid "Сумма"
+msgstr "Сумма"
+
+#: .\shop\templates\shop\user_cart.html:31
+#, fuzzy
+#| msgid "Итого"
+msgid "Итого:"
+msgstr "Итого"
+
+#: .\shop\templates\shop\user_cart.html:35
+#, fuzzy
+#| msgid "Корзина"
+msgid "Корзина пуста"
+msgstr "Корзина"
+
+#: .\shop\templates\shop\user_cart.html:39
+#, fuzzy
+#| msgid "Вернуться на главную"
+msgid "Вернуться в админ-панель"
+msgstr "Вернуться на главную"
+
+#: .\shop\templates\shop\wishlist.html:317
+#, fuzzy
+#| msgid "Ваша корзина"
+msgid "В корзину"
+msgstr "Ваша корзина"
+
+#: .\shop\templates\shop\wishlist.html:326
+msgid "Ваше избранное пусто"
+msgstr "Ваше избранное пусто"
+
+#: .\shop\templates\shop\wishlist.html:327
+msgid "Добавьте товары в избранное, чтобы вернуться к ним позже"
+msgstr "Добавьте товары в избранное, чтобы вернуться к ним позже"
+
+#: .\shop\views.py:71
+msgid "Регистрация успешна. Вы вошли."
+msgstr "Регистрация успешна. Вы вошли."
+
+#: .\shop\views.py:106
+#, fuzzy
+#| msgid "Год выпуска"
+msgid "Вход выполнен"
+msgstr "Год выпуска"
+
+#: .\shop\views.py:109
+#, fuzzy
+#| msgid "Неверный пароль"
+msgid "Неверный логин/email или пароль"
+msgstr "Неверный пароль"
+
+#: .\shop\views.py:139
+#, fuzzy
+#| msgid "В корзине пока нет товаров."
+msgid "Только админ может добавлять товары."
+msgstr "В корзине пока нет товаров."
+
+#: .\shop\views.py:148
+msgid "Товар добавлен"
+msgstr "Товар добавлен"
+
+#: .\shop\views.py:153
+#, fuzzy
+#| msgid "Удалить товар?"
+msgid "Добавить товар"
+msgstr "Удалить товар?"
+
+#: .\shop\views.py:162
+msgid "Вы не можете редактировать товар"
+msgstr "Вы не можете редактировать товар"
+
+#: .\shop\views.py:172
+msgid "Товар обновлён"
+msgstr "Товар обновлён"
+
+#: .\shop\views.py:177
+#, fuzzy
+#| msgid "Удалить товар?"
+msgid "Редактировать товар"
+msgstr "Удалить товар?"
+
+#: .\shop\views.py:186
+#, fuzzy
+#| msgid "Удалить товар?"
+msgid "Вы не можете удалить товар"
+msgstr "Удалить товар?"
+
+#: .\shop\views.py:191
+#, fuzzy
+#| msgid "Товар"
+msgid "Товар удалён"
+msgstr "Товар"
+
+#: .\shop\views.py:250
+msgid "Пожалуйста, авторизуйтесь"
+msgstr "Пожалуйста, авторизуйтесь"
+
+#: .\shop\views.py:263
+#, fuzzy, python-format
+#| msgid "Добавить в корзину"
+msgid "Товар '%s' добавлен в корзину"
+msgstr "Добавить в корзину"
+
+#: .\shop\views.py:326 .\shop\views.py:328
+#, fuzzy, python-format
+#| msgid "Ваша корзина"
+msgid "%s удалён из корзины"
+msgstr "Ваша корзина"
+
+#: .\shop\views.py:374
+msgid "У вас нет доступа к админ-панели"
+msgstr "У вас нет доступа к админ-панели"
+
+#: .\shop\views.py:392
+msgid "У вас нет доступа"
+msgstr "У вас нет доступа"
+
+#: .\shop\views.py:430
+msgid "Вы не можете изменить свою роль"
+msgstr "Вы не можете изменить свою роль"
+
+#: .\shop\views.py:435
+#, fuzzy, python-format
+#| msgid "Администратор"
+msgid "%s больше не администратор"
+msgstr "Администратор"
+
+#: .\shop\views.py:438
+#, fuzzy, python-format
+#| msgid "Администратор"
+msgid "%s теперь администратор"
+msgstr "Администратор"
+
+#: .\shop\views.py:454
+#, fuzzy
+#| msgid "Удалить из избранного"
+msgid "Товар удален из избранного"
+msgstr "Удалить из избранного"
+
+#: .\shop\views.py:458
+#, fuzzy
+#| msgid "В вашем избранном"
+msgid "Товар добавлен в избранное"
+msgstr "В вашем избранном"
+
+#: .\shop\views.py:492
+msgid "Email не может быть пустым"
+msgstr "Email не может быть пустым"
+
+#: .\shop\views.py:494
+msgid "Новый email совпадает со старым"
+msgstr "Новый email совпадает со старым"
+
+#: .\shop\views.py:496
+msgid "Email уже используется"
+msgstr "Email уже используется"
+
+#: .\shop\views.py:498
+msgid "Неверный пароль"
+msgstr "Неверный пароль"
+
+#: .\shop\views.py:502
+msgid "Email изменен"
+msgstr "Email изменен"
+
+#: .\shop\views.py:509
+msgid "Имя изменено"
+msgstr "Имя изменено"
+
+#: .\shop\views.py:516
+msgid "Фамилия изменена"
+msgstr "Фамилия изменена"
+
+#: .\shop\views.py:524
+msgid "Пароль не может быть пустым"
+msgstr "Пароль не может быть пустым"
+
+#: .\shop\views.py:526
+msgid "Пароли не совпадают"
+msgstr "Пароли не совпадают"
+
+#: .\shop\views.py:528
+msgid "Пароль должен быть минимум 6 символов"
+msgstr "Пароль должен быть минимум 6 символов"
+
+#: .\shop\views.py:533
+msgid "Пароль изменен"
+msgstr "Пароль изменен"
+
+#~ msgid "Действие"
+#~ msgstr "Действие"
+
+#~ msgid "Искать"
+#~ msgstr "Искать"
+
+#~ msgid "Избранное"
+#~ msgstr "Избранное"
+
+#~ msgid "Профиль"
+#~ msgstr "Профиль"
+
+#~ msgid "Оставьте поля пусты, если не хотите менять пароль"
+#~ msgstr "Оставьте поля пусты, если не хотите менять пароль"
+
+#~ msgid "Оставьте пусто для неизменности"
+#~ msgstr "Оставьте пусто для неизменности"
+
+#~ msgid "Товары, которые вы сохранили"
+#~ msgstr "Товары, которые вы сохранили"
+
+#~ msgid "товар"
+#~ msgstr "товар"
+
+#~ msgid "товаров"
+#~ msgstr "товаров"
+
+#~ msgid "Просмотр"
+#~ msgstr "Просмотр"
+
+#~ msgid "Удалить товар из избранного?"
+#~ msgstr "Удалить товар из избранного?"

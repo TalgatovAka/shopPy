@@ -1,0 +1,35 @@
+{% extends "shop/base.html" %}
+{% load i18n %}
+{% block title %}Регистрация{% endblock %}
+{% block content %}
+  <div class="auth-wrapper">
+    <div class="auth-card">
+      <h2>{% trans "Регистрация" %}</h2>
+      <form method="post">
+        {% csrf_token %}
+        <div class="form-row">
+          {{ form.username.label_tag }}
+          {{ form.username }}
+          {% for e in form.username.errors %}<div class="error">{{ e }}</div>{% endfor %}
+        </div>
+        <div class="form-row">
+          {{ form.email.label_tag }}
+          {{ form.email }}
+          {% for e in form.email.errors %}<div class="error">{{ e }}</div>{% endfor %}
+        </div>
+        <div class="form-row">
+          {{ form.password.label_tag }}
+          {{ form.password }}
+          {% for e in form.password.errors %}<div class="error">{{ e }}</div>{% endfor %}
+        </div>
+        <div class="form-row">
+          {{ form.password2.label_tag }}
+          {{ form.password2 }}
+        </div>
+        <button type="submit">{% trans "Зарегистрироваться" %}</button>
+      </form>
+
+      <p class="muted" style="margin-top:10px;">{% trans "Уже есть аккаунт?" %} <a href="{% url 'shop:login' %}">{% trans "Войти" %}</a></p>
+    </div>
+  </div>
+{% endblock %}
