@@ -1,20 +1,6 @@
-/*
-  Custom Canvas Chart Library: createBarChart
-  - canvas: HTMLCanvasElement
-  - items: [{date: 'DD.MM.YYYY', value: number}, ...]
-  - options: { barColor, fillColor, hoverColor, gridColor, dateFormat }
-
-  Draws a vertical bar chart with grid, axes and a hover tooltip.
-  No external dependencies.
-*/
-(function(){
-  function parseDateDMY(s) {
-    // expects DD.MM.YYYY
-    const parts = (s||'').split('.');
-    if (parts.length !== 3) return new Date(s);
-    return new Date(parseInt(parts[2],10), parseInt(parts[1],10)-1, parseInt(parts[0],10));
-  }
-
+// Simple Charts Library
+(function() {
+  
   function createTooltip() {
     const t = document.createElement('div');
     t.style.position = 'fixed';
@@ -40,8 +26,8 @@
     canvas._dpr = dpr;
   }
 
-  // Draws a vertical bar chart based on items
-  function createBarChart(canvas, items, options) {
+  // ==================== BAR CHART ====================
+  window.createBarChart = function(canvas, items, options) {
     options = options || {};
     const cfg = {
       barColor: options.barColor || '#1e40af',
@@ -50,16 +36,16 @@
       gridColor: options.gridColor || '#eef6ff',
       bg: options.bg || '#ffffff',
       padding: options.padding || {left:48, right:20, top:20, bottom:48},
-      dateFormat: options.dateFormat || 'DD.MM.YYYY'
     };
 
     const ctx = canvas.getContext('2d');
     const tooltip = createTooltip();
-
-    const points = (items || []).map((it) => {
-      const d = parseDateDMY(it.date);
-      return {date: d, label: it.date, value: Number(it.value)};
-    });
+    
+    const points = (items || []).map((it) => ({
+      date: it.date,
+      label: it.date,
+      value: Number(it.value),
+    }));
 
     function draw() {
       fitCanvas(canvas);
@@ -68,11 +54,10 @@
 
       const W = canvas.width / dpr;
       const H = canvas.height / dpr;
-      ctx.clearRect(0,0,W,H);
+      ctx.clearRect(0, 0, W, H);
 
-      // background
       ctx.fillStyle = cfg.bg;
-      ctx.fillRect(0,0,W,H);
+      ctx.fillRect(0, 0, W, H);
 
       if (!points.length) return;
 
@@ -80,7 +65,6 @@
       const plotW = W - pad.left - pad.right;
       const plotH = H - pad.top - pad.bottom;
 
-      // scales
       const values = points.map(p => p.value);
       const vmin = Math.min.apply(null, values);
       const vmax = Math.max.apply(null, values);
@@ -94,15 +78,17 @@
       function xFor(i) {
         return pad.left + i * barFullWidth + (barFullWidth - barW) / 2 + barW/2;
       }
+      
       function xLeftFor(i){
         return pad.left + i * barFullWidth + (barFullWidth - barW) / 2;
       }
+      
       function yFor(v) {
         const t = (v - yMin) / (yMax - yMin);
         return pad.top + (1 - t) * plotH;
       }
 
-      // horizontal grid
+      // Grid
       ctx.strokeStyle = cfg.gridColor;
       ctx.lineWidth = 1;
       ctx.beginPath();
@@ -118,42 +104,31 @@
       }
       ctx.stroke();
 
-      // bars
+      // Bars
       for (let i=0;i<points.length;i++){
         const left = xLeftFor(i);
         const topY = yFor(points[i].value);
         const bottomY = pad.top + plotH;
         const h = Math.max(0.5, bottomY - topY);
 
-        // fill (light)
         ctx.beginPath();
         ctx.rect(left + 0.5, topY, barW, h);
         ctx.fillStyle = cfg.fillColor;
         ctx.fill();
 
-        // bar color (solid)
         ctx.beginPath();
         ctx.rect(left + 0.5, topY, barW, h);
         ctx.fillStyle = cfg.barColor;
         ctx.globalAlpha = 0.95;
         ctx.fill();
         ctx.globalAlpha = 1;
-
-        // subtle border
-        ctx.beginPath();
-        ctx.lineWidth = 1;
-        ctx.strokeStyle = 'rgba(0,0,0,0.06)';
-        ctx.rect(left + 0.5, topY, barW, h);
-        ctx.stroke();
       }
 
-      // x labels (adaptive: compute optimal spacing to prevent overlap)
+      // Labels
       ctx.fillStyle = '#475569';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'top';
       ctx.font = '11px system-ui, Arial';
-      
-      // estimate: "DD.MM" is about 35-40px wide, add 10px margin = 50px min spacing
       const minLabelSpacing = 50;
       const maxLabelsCount = Math.floor(plotW / minLabelSpacing);
       const optimalStep = Math.max(1, Math.ceil(points.length / Math.max(1, maxLabelsCount)));
@@ -161,9 +136,7 @@
       for (let i=0; i<points.length; i++){
         if (i % optimalStep === 0 || i === points.length - 1){
           const x = xFor(i);
-          const parts = points[i].label.split('.');
-          // Format: DD.MM (no year)
-          const shortDate = parts.length >= 2 ? (parts[0] + '.' + parts[1]) : points[i].label;
+          const shortDate = points[i].label.split('.').slice(0,2).join('.');
           ctx.fillText(shortDate, x, H - pad.bottom + 8);
         }
       }
@@ -184,94 +157,45 @@
         if (x >= left && x <= right){ hovered = i; break; }
       }
 
-      if (hovered === -1){ tooltip.style.display = 'none'; draw(); return; }
+      if (hovered === -1){ tooltip.style.display = 'none'; return; }
 
-      // position tooltip
       tooltip.style.display = 'block';
       tooltip.innerText = points[hovered].label + ' — ' + points[hovered].value.toString();
       tooltip.style.left = (e.clientX) + 'px';
       tooltip.style.top = (e.clientY - 12) + 'px';
-
-      // redraw and highlight hovered bar
-      draw();
-      const dpr = canvas._dpr || 1;
-      const W = canvas.width / dpr;
-      const H = canvas.height / dpr;
-      const barFullW = (W - pad.left - pad.right) / points.length;
-      const left = pad.left + hovered * barFullW + (barFullW - Math.max(6, Math.floor(barFullW*0.6))) / 2;
-      const topY = (function(){
-        const values = points.map(p => p.value);
-        const vmin = Math.min.apply(null, values);
-        const vmax = Math.max.apply(null, values);
-        const vpad = Math.max(10, Math.round((vmax - vmin) * 0.12));
-        const yMin = Math.max(0, vmin - vpad);
-        const yMax = vmax + vpad;
-        const t = (points[hovered].value - yMin) / (yMax - yMin);
-        const plotH = H - pad.top - pad.bottom;
-        return pad.top + (1 - t) * plotH;
-      })();
-      const bottomY = pad.top + (H - pad.top - pad.bottom);
-      const h = Math.max(0.5, bottomY - topY);
-
-      const ctx2 = canvas.getContext('2d');
-      ctx2.setTransform(dpr,0,0,dpr,0,0);
-      // overlay highlight
-      ctx2.beginPath();
-      ctx2.fillStyle = cfg.hoverColor;
-      ctx2.globalAlpha = 0.14;
-      ctx2.rect(left + 0.5, topY, Math.max(6, Math.floor(barFullW*0.6)), h);
-      ctx2.fill();
-      ctx2.globalAlpha = 1;
-
-      // value bubble above bar
-      const cx = left + Math.max(6, Math.floor(barFullW*0.6)) / 2 + 0.5;
-      const cy = topY - 10;
-      const bw = 80; const bh = 30;
-      const bx = cx - bw/2; const by = cy - bh/2;
-      ctx2.fillStyle = 'rgba(15,23,42,0.95)';
-      ctx2.beginPath();
-      const r = 6;
-      ctx2.moveTo(bx + r, by);
-      ctx2.arcTo(bx + bw, by, bx + bw, by + bh, r);
-      ctx2.arcTo(bx + bw, by + bh, bx, by + bh, r);
-      ctx2.arcTo(bx, by + bh, bx, by, r);
-      ctx2.arcTo(bx, by, bx + bw, by, r);
-      ctx2.closePath();
-      ctx2.fill();
-      ctx2.fillStyle = '#fff';
-      ctx2.font = '700 13px system-ui, Arial';
-      ctx2.textAlign = 'center';
-      ctx2.textBaseline = 'middle';
-      ctx2.fillText(points[hovered].value.toString(), cx, cy);
     }
 
-    function onLeave(){ tooltip.style.display = 'none'; draw(); }
+    function onLeave(){ 
+      tooltip.style.display = 'none'; 
+    }
 
     draw();
     canvas.addEventListener('mousemove', onMove);
     canvas.addEventListener('mouseleave', onLeave);
     window.addEventListener('resize', draw);
 
-    return { redraw: draw, destroy: function(){ canvas.removeEventListener('mousemove', onMove); canvas.removeEventListener('mouseleave', onLeave); window.removeEventListener('resize', draw); if (tooltip && tooltip.parentNode) tooltip.parentNode.removeChild(tooltip); } };
-  }
+    return { redraw: draw };
+  };
 
-  // Draws a pie chart based on items
-  function createPieChart(canvas, items, options) {
+  // ==================== PIE CHART ====================
+  window.createPieChart = function(canvas, items, options) {
     options = options || {};
     const cfg = {
-      colors: options.colors || ['#1e40af', '#3b82f6', '#60a5fa', '#93c5fd', '#dbeafe', '#7c3aed'],
+      colors: options.colors || ['#1e40af', '#3b82f6', '#7c3aed', '#db2777', '#f59e0b'],
       bg: options.bg || '#ffffff',
       textColor: options.textColor || '#1f2937'
     };
 
     const ctx = canvas.getContext('2d');
     const tooltip = createTooltip();
-    
+
     const points = (items || []).map((it, idx) => ({
       label: it.label || it.name || ('Item ' + idx),
       value: Number(it.value) || 0,
       color: cfg.colors[idx % cfg.colors.length]
     }));
+
+    console.log('createPieChart called with points:', points);
 
     function draw() {
       fitCanvas(canvas);
@@ -280,35 +204,44 @@
 
       const W = canvas.width / dpr;
       const H = canvas.height / dpr;
-      
-      // Clear
+
       ctx.fillStyle = cfg.bg;
       ctx.fillRect(0, 0, W, H);
 
-      if (!points || points.length === 0) return;
+      if (!points || points.length === 0) {
+        console.log('No points to draw');
+        return;
+      }
 
       const total = points.reduce((s, p) => s + p.value, 0);
-      if (total <= 0) return;
+      console.log('Total value:', total);
+      
+      if (total <= 0) {
+        console.log('Total is zero or negative');
+        return;
+      }
 
       const cx = W * 0.35;
       const cy = H * 0.4;
       const r = Math.min(W, H) * 0.25;
 
+      console.log('Drawing pie at', cx, cy, 'radius', r);
+
       let angle = -Math.PI / 2;
-      
+
       for (let i = 0; i < points.length; i++) {
         const sliceSize = (points[i].value / total) * 2 * Math.PI;
-        
+
         ctx.beginPath();
         ctx.arc(cx, cy, r, angle, angle + sliceSize);
         ctx.lineTo(cx, cy);
         ctx.fillStyle = points[i].color;
         ctx.fill();
-        
+
         ctx.strokeStyle = '#fff';
         ctx.lineWidth = 2;
         ctx.stroke();
-        
+
         angle += sliceSize;
       }
 
@@ -316,20 +249,22 @@
       ctx.font = '12px Arial';
       ctx.fillStyle = cfg.textColor;
       ctx.textAlign = 'left';
-      
+
       const legendX = cx + r + 30;
       const legendY = cy - points.length * 10;
-      
+
       for (let i = 0; i < points.length; i++) {
         const y = legendY + i * 22;
-        
+
         ctx.fillStyle = points[i].color;
         ctx.fillRect(legendX, y, 12, 12);
-        
+
         ctx.fillStyle = cfg.textColor;
         const pct = ((points[i].value / total) * 100).toFixed(1);
         ctx.fillText(points[i].label + ' ' + points[i].value + ' (' + pct + '%)', legendX + 18, y + 10);
       }
+
+      console.log('Pie chart drawn');
     }
 
     function onMove(e) {
@@ -340,36 +275,34 @@
       const dpr = canvas._dpr || 1;
       const W = canvas.width / dpr;
       const H = canvas.height / dpr;
-      
+
       const cx = W * 0.35;
       const cy = H * 0.4;
       const r = Math.min(W, H) * 0.25;
-      
+
       const dx = x - cx;
       const dy = y - cy;
       const dist = Math.sqrt(dx * dx + dy * dy);
-      
+
       if (dist > r) {
         tooltip.style.display = 'none';
         return;
       }
 
       const total = points.reduce((s, p) => s + p.value, 0);
-      let angle = Math.atan2(dy, dx) + Math.PI / 2;
-      if (angle < 0) angle += 2 * Math.PI;
-      
-      let currentAngle = 0;
+      let currentAngle = -Math.PI / 2;
       let hoveredIdx = -1;
-      
+
       for (let i = 0; i < points.length; i++) {
         const sliceSize = (points[i].value / total) * 2 * Math.PI;
-        if (angle >= currentAngle && angle <= currentAngle + sliceSize) {
+        let angle = Math.atan2(dy, dx);
+        if (angle >= currentAngle - Math.PI / 2 && angle <= currentAngle + sliceSize - Math.PI / 2) {
           hoveredIdx = i;
           break;
         }
         currentAngle += sliceSize;
       }
-      
+
       if (hoveredIdx >= 0) {
         tooltip.style.display = 'block';
         const pct = ((points[hoveredIdx].value / total) * 100).toFixed(1);
@@ -390,18 +323,7 @@
     canvas.addEventListener('mouseleave', onLeave);
     window.addEventListener('resize', draw);
 
-    return {
-      redraw: draw,
-      destroy: function() {
-        canvas.removeEventListener('mousemove', onMove);
-        canvas.removeEventListener('mouseleave', onLeave);
-        window.removeEventListener('resize', draw);
-        if (tooltip && tooltip.parentNode) tooltip.parentNode.removeChild(tooltip);
-      }
-    };
-  }
-
-  window.createBarChart = createBarChart;
-  window.createPieChart = createPieChart;
+    return { redraw: draw };
+  };
 
 })();

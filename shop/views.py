@@ -220,8 +220,6 @@ def product_json(request, pk):
         "previous_price": str(product.previous_price) if product.previous_price else None,
         "photo": product.photo.url if product.photo else "",
     })
-
-
 # ===== СТАТИСТИКА =====
 def stats_view(request):
     """Страница со статистикой и холстом для отрисовки диаграммы."""
@@ -245,6 +243,27 @@ def stats_data(request):
             "value": value,
         })
 
+    return JsonResponse({"items": items})
+
+
+def itemuse1_data(request):
+    """Возвращает JSON для кругового графика: реальные товары из корзин."""
+    from django.db.models import Sum, Count
+    
+    # Получаем все товары с их количеством в корзинах
+    product_stats = CartItem.objects.values('product__name').annotate(
+        total_quantity=Sum('quantity'),
+        cart_count=Count('cart', distinct=True)
+    ).order_by('-total_quantity')[:10]
+    
+    items = []
+    for stat in product_stats:
+        if stat['product__name']:
+            items.append({
+                "name": stat['product__name'],
+                "value": int(stat['total_quantity'] or 0)
+            })
+    
     return JsonResponse({"items": items})
 
 

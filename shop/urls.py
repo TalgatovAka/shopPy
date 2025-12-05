@@ -27,6 +27,7 @@ urlpatterns = [
     # Статистика
     path("stats/", views.stats_view, name="stats"),
     path("stats/data/", views.stats_data, name="stats_data"),
+    path("stat/itemuse1/", views.itemuse1_data, name="itemuse1_data"),
     
     # Wishlist
     path("wishlist/", views.wishlist_view, name="wishlist"),
